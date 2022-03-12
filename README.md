@@ -4,18 +4,24 @@ Use this guide as a reference when you get stuck or need a refresher on how to d
 
 ##### Related Guides
 
-- [Git Guide](https://github.com/justinkunz/GitCheatsheet)
+- [Git Cheatsheet](https://github.com/justinkunz/GitCheatsheet)
 
 ##### Additional Resources
 
+- [JavaScript for Cats](http://jsforcats.com/)
 - [Code Academy's Free JavaScript Beginner's Course](https://www.codecademy.com/learn/introduction-to-javascript)
+- [JavaScript 30](https://javascript30.com/)
 - [Free Code Camp](https://www.freecodecamp.org/)
+- [Learn JS](https://www.learn-js.org/)
+- [JS Hero](https://www.jshero.net/en/success.html)
 
 ##### Project Ideas
 
 - **Tip Calculator** - Make a site that asks that asks users details about their bill and helps them calculate a tip.
 - **To Do List** - Make a to do list that allows users to add and delete to do items
 - **Stopwatch** - Make a simple timer app that counts down from 60 seconds.
+- **Random Quote Generator** - Generate a random quote from an array of quotes whenever a user visits the page.
+- **Calculator** - Make an on screen calculator using HTML, CSS and JavaScript.
 
 ## Index
 
