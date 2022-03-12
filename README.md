@@ -2,9 +2,20 @@
 
 Use this guide as a reference when you get stuck or need a refresher on how to do something. While coding examples are included, you will learn better if you retype them and avoid copying/pasting.
 
-###### Related Guides
+##### Related Guides
 
 - [Git Guide](https://github.com/justinkunz/GitCheatsheet)
+
+##### Additional Resources
+
+- [Code Academy's Free JavaScript Beginner's Course](https://www.codecademy.com/learn/introduction-to-javascript)
+- [Free Code Camp](https://www.freecodecamp.org/)
+
+##### Project Ideas
+
+- **Tip Calculator** - Make a site that asks that asks users details about their bill and helps them calculate a tip.
+- **To Do List** - Make a to do list that allows users to add and delete to do items
+- **Stopwatch** - Make a simple timer app that counts down from 60 seconds.
 
 ## Index
 
