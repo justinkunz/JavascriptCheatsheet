@@ -1,5 +1,11 @@
 # JavaScript Cheatsheet
 
+Use this guide as a reference when you get stuck or need a refresher on how to do something. While coding examples are included, you will learn better if you retype them and avoid copying/pasting.
+
+###### Related Guides
+
+- [Git Guide](https://github.com/justinkunz/GitCheatsheet)
+
 ## Index
 
 - [Declaring Variables](#declaring-variables)
@@ -13,6 +19,7 @@
   - [Looping Through an Array](#looping-through-an-array)
 - [Objects](#objects)
   - [Accessing Properties](#accessing-object-properties)
+- [Logical Comparison Operators](#logical-comparison-operators)
 - [Conditional Statements](#conditional-statements)
 - [Functions](#functions)
   - [Invoking Functions](#invoking-functions)
@@ -23,6 +30,20 @@
   - [Accessing Dom Elements](#accessing-dom-elements)
   - [Changing Text and Attributes](#changing-text-and-element-attributes)
   - [Creating New Elements](#creating-new-elements)
+- [Event Listeners](#event-listeners)
+  - [Click Events](#click-events)
+  - [Keyboard Events](#keyboard-events)
+- [Browser Interactive Popups](#browser-interactive-popups)
+  - [Alerts](#alerts)
+  - [Prompts](#prompts)
+  - [Confirms](#confirms)
+- [Timeouts and Intervals](#timeouts-and-intervals)
+  - [Timeouts](#timeouts)
+  - [Intervals](#intervals)
+  - [Clearing Intervals](#clearing-intervals)
+- [Browser Storage](#browser-storage)
+  - [Local Storage](#local-storage)
+  - [Session Storage](#session-storage)
 
 ### Declaring Variables
 
@@ -236,6 +257,29 @@ console.log(car.make); // Tesla
 console.log(car.features.hasNavigation); // true
 console.log(car.pastOwners[0]); // Tom
 car.honk(); // Beep beep!
+```
+
+### Logical Comparison Operators
+
+We use logical comparison operators to compare the equality of two values.
+
+- `===` - Equal in both type & value
+- `==` - Equal in value
+- `!==` - Not equal in both type and value
+- `!=` - Not equal in value
+- `>` - Greater than
+- `>=` - Greater than or equal to
+- `<` - Less than
+- `<=` - Less than or equal to
+
+```js
+var a = 5;
+var b = '5';
+var c = 10;
+
+console.log(a === b); // False
+console.log(a == b); // True
+console.log(c > a); // True
 ```
 
 ### Conditional Statements
@@ -511,4 +555,441 @@ var parentCardSection = document.querySelector('#cardSection');
 
 // Finally, we add our new element as a child of the #cardSection element
 parentCardSection.appendChild(myNewCardElement);
+```
+
+### Event Listeners
+
+We can use event listeners to get our code to react to user driven events, like button clicks or keyboard events.
+
+#### Click Events
+
+To add a click event listener to an HTML element, target the element and call the `addEventListener` method, passing in `click` as the first argument and the callback function we want to execute when our click occurs as the second argument.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="Email" type="email" id="emailAddress" />
+      <input placeholder="Password" type="password" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var btnElement = document.getElementById('btn');
+
+// addEventListener takes in two arguements:
+// The type of event to listen for (clicks in our case)
+// And the function to execute when the event occurs
+btnElement.addEventListener('click', function (event) {
+  // Submit Buttons or buttons within forms can have some unexpected default behavior
+  // To override this default behavior, we can use the `preventDefault` method on the
+  // event object JavaScript provides us
+  event.preventDefault();
+  console.log("I've been clicked!");
+});
+```
+
+Alternatively, we can add an `onclick` attribute to the element within our HTML
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="Email" type="email" id="emailAddress" />
+      <input placeholder="Password" type="password" />
+      <button id="btn" onclick="myFunction()">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+#### Keyboard Events
+
+To listen for keyboard events within an HTML element, target the element and call the `addEventListener`, passing in either `keyup`, `keypress`, or `keydown` (depending on exactly what event we're wanting to listen for) as the first argument, and the callback function we want to execute when the event occurs as the second argument.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="Email" type="email" id="emailAddress" />
+      <input placeholder="Password" type="password" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var emailInput = document.querySelector('#emailAddress');
+
+// addEventListener takes in two arguements:
+// The type of event to listen for (keydown events in our case)
+// And the function to execute when the event occurs
+emailInput.addEventListener('keydown', function (event) {
+  console.log('The following key has been typed:', event.key);
+});
+```
+
+### Browser Interactive Popups
+
+We can use browser popups to deliver messages and ask questions with users visiting our site.
+
+#### Alerts
+
+The `alert()` function is used to deliver messages to users. Users must click `ok` to dismiss the message.
+
+```js
+alert('Thank you for visiting my site');
+```
+
+#### Prompts
+
+The `prompt()` function is used to get input from a user. Along with the `prompt` message, the user will be given an input field to type their response. Whatever input is entered in here will be returned from the `prompt` function.
+
+```js
+// Whatever the user types in the prompt field will be stored
+// in the `firstName` variable
+var firstName = prompt('What is your first name?');
+```
+
+#### Confirms
+
+The `confirm()` function is used to ask a yes or no question to users. When presented with a `confirm` message, a user can select from two options: `ok` or `cancel`. If they select `ok`, the `confirm` function returns true. If they select `cancel`, the `confirm` function returns false.
+
+```js
+// The user will be asked "Do you like pizza?"
+// If they click "ok", `likesPizza` is true
+// If they click "cancel", `likesPizza` is false
+var likesPizza = confirm('Do you like pizza?');
+
+if (likesPizza === true) {
+  alert('Yay! I also like Pizza!');
+} else {
+  alert('Boo!');
+}
+```
+
+### Timeouts and Intervals
+
+There may be times where we want to delay execution of some code. We can accomplish this using timeouts and intervals in JavaScript.
+
+#### Timeouts
+
+Timeouts in JavaScript delay the execution of our code by a specified amount of time. To add a timeout, we can use the built in `setTimeout()` function.
+
+`setTimeout()` takes in two arguments: the function to execute once time has elapsed and the amount of time to wait (in milliseconds)
+
+```js
+setTimeout(function () {
+  console.log('This will log to the console once after 1 second has passed');
+}, 1000);
+```
+
+#### Intervals
+
+Intervals work similiarly to timeouts, but instead of executing our supplied code once, our code runs on a regular interval we specify. To add an interval, we can use the built in `setInterval()` function.
+
+Like `setTimeout()`, `setInterval()` takes in two arguments: a function to execute, and the frequency in which to execute it (in milliseconds)
+
+```js
+setInterval(function () {
+  console.log('This will log to console every second');
+}, 1000);
+```
+
+#### Clearing Intervals
+
+Many times when working with intervals, we'll want a way to eventually stop them from executing further. We can accomplish this using the built in `clearInterval()` function.
+
+To do this, first declare a new variable set equal to your interval. Then, to later clear the interval, call `clearInterval()` passing in the interval reference.
+
+```js
+var timeRemaining = 5;
+
+// This will countdown from 5 to 0
+// Once `timeRemaining` is equal to 0, the interval is cleared
+// and the callback will not be executed again
+var countdownInterval = setInterval(function () {
+  console.log('Time remaining:', timeRemaining);
+  timeRemaining--;
+
+  if (timeRemaining === 0) {
+    clearInterval(countdownInterval);
+  }
+}, 1000);
+```
+
+### Browser Storage
+
+Many times, we will want our applications to remember some information about a user's last visit to our site. To accomplish this, we can utilize `localStorage` and `sessionStorage`.
+
+Keep in mind, browser storage is domain specific, so your site does not have access to items stored by other sites.
+
+#### Local Storage
+
+Local storage allows us to add items to and retrieve items from storage managed by the browser.
+
+To add an item to local storage, we use the `setItem()` method on the `localStorage` object. The `setItem()` method takes in two arguments: A name for the item we are setting, and a value.
+
+To retrieve an item from local storage, we use the `getItem()` method on the `localStorage` object. The `getItem()` method takes in the name of the item to retrieve, and returns the stored value.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="First Name" id="firstName" />
+      <input placeholder="Last Name" id="lastName" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var firstNameInput = document.getElementById('firstName');
+var lastNameInput = document.getElementById('lastName');
+
+function recordValues() {
+  // Add a record with the name "firstName" to our local storage
+  // Set the value to whatever is in the firstNameInput text field
+  localStorage.setItem('firstName', firstNameInput.value);
+  // Add a record with the name "lastName" to our local storage
+  // Set the value to whatever is in the lastNameInput text field
+  localStorage.setItem('lastName', lastNameInput.value);
+}
+
+// Run the recordValues function whenever the button is clicked
+document.getElementById('btn').addEventListener('click', recordValues);
+
+function retrieveStoredValues() {
+  // Get the value stored in local storage under the key `firstName`
+  // and store it in the `storedFirstNameValue` variable
+  var storedFirstNameValue = localStorage.getItem('firstName');
+  // Update the firstNameInput's value to match what was stored in local storage
+  firstNameInput.value = storedFirstNameValue;
+
+  // Get the value stored in local storage under the key `lastName`
+  // and store it in the `storedLastNameValue` variable
+  var storedLastNameValue = localStorage.getItem('lastName');
+  // Update the lastNameInput's value to match what was stored in local storage
+  lastNameInput.value = storedLastNameValue;
+}
+
+// When the page first loads,
+// Pull the stored values out of localStorage and set them to the corresponding text fields
+retrieveStoredValues();
+```
+
+Local Storage is fantastic at storing strings...It's not good, however, at storing objects or arrays.
+
+So if we want to store an object or an array inside local storage, we will first need to convert it to a string. We can do this using `JSON.stringify()`, and passing in the object or array we need to convert.
+
+Since our value will be stored as string, we will need to convert it back to an object before we can use it again in our code. We can do this using `JSON.parse()` and passing in the stringified object/array.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="First Name" id="firstName" />
+      <input placeholder="Last Name" id="lastName" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var firstNameInput = document.getElementById('firstName');
+var lastNameInput = document.getElementById('lastName');
+
+function recordValues() {
+  var usersName = {
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+  };
+
+  // Before we can store this in local storage, we will need to first
+  // stringify the object using JSON.stringify()
+  localStorage.setItem('name', JSON.stringify(usersName));
+}
+
+// Run the recordValues function whenever the button is clicked
+document.getElementById('btn').addEventListener('click', recordValues);
+
+function retrieveStoredValues() {
+  // After retrieving the item from local storage,
+  // we will need to parse the object string back into a normal object using JSON.parse();
+  var storedFullName = JSON.parse(localStorage.getItem('name'));
+
+  // Update the HTML Input values to match what was stored in localStorage
+  firstNameInput.value = storedFullName.firstName;
+  lastNameInput.value = storedFullName.lastName;
+}
+
+// When the page first loads,
+// Pull the stored values out of localStorage and set them to the corresponding text fields
+retrieveStoredValues();
+```
+
+#### Session Storage
+
+Like Local storage, Session storage allows us to add items to and retrieve items from storage managed by the browser.
+
+**While local storage remembers data from each visit, sessionStorage is cleared whenever the page session ends. (when the tab is closed)**
+
+To add an item to local storage, we use the `setItem()` method on the `sessionStorage` object. The `setItem()` method takes in two arguments: A name for the item we are setting, and a value.
+
+To retrieve an item from local storage, we use the `getItem()` method on the `sessionStorage` object. The `getItem()` method takes in the name of the item to retrieve, and returns the stored value.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="First Name" id="firstName" />
+      <input placeholder="Last Name" id="lastName" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var firstNameInput = document.getElementById('firstName');
+var lastNameInput = document.getElementById('lastName');
+
+function recordValues() {
+  // Add a record with the name "firstName" to our session storage
+  // Set the value to whatever is in the firstNameInput text field
+  sessionStorage.setItem('firstName', firstNameInput.value);
+  // Add a record with the name "lastName" to our session storage
+  // Set the value to whatever is in the lastNameInput text field
+  sessionStorage.setItem('lastName', lastNameInput.value);
+}
+
+// Run the recordValues function whenever the button is clicked
+document.getElementById('btn').addEventListener('click', recordValues);
+
+function retrieveStoredValues() {
+  // Get the value stored in session storage under the key `firstName`
+  // and store it in the `storedFirstNameValue` variable
+  var storedFirstNameValue = sessionStorage.getItem('firstName');
+  // Update the firstNameInput's value to match what was stored in local storage
+  firstNameInput.value = storedFirstNameValue;
+
+  // Get the value stored in session storage under the key `lastName`
+  // and store it in the `storedLastNameValue` variable
+  var storedLastNameValue = sessionStorage.getItem('lastName');
+  // Update the lastNameInput's value to match what was stored in session storage
+  lastNameInput.value = storedLastNameValue;
+}
+
+// When the page first loads,
+// Pull the stored values out of localStorage and set them to the corresponding text fields
+retrieveStoredValues();
+```
+
+Like Local Storage, Session Storage is fantastic at storing strings...It's not good, however, at storing objects or arrays.
+
+So if we want to store an object or an array inside session storage, we will first need to convert it to a string. We can do this using `JSON.stringify()`, and passing in the object or array we need to convert.
+
+Since our value will be stored as string, we will need to convert it back to an object before we can use it again in our code. We can do this using `JSON.parse()` and passing in the stringified object/array.
+
+###### index.html
+
+```html
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <form>
+      <input placeholder="First Name" id="firstName" />
+      <input placeholder="Last Name" id="lastName" />
+      <button id="btn">Sign Up</button>
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+###### script.js
+
+```js
+var firstNameInput = document.getElementById('firstName');
+var lastNameInput = document.getElementById('lastName');
+
+function recordValues() {
+  var usersName = {
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+  };
+
+  // Before we can store this in session storage, we will need to first
+  // stringify the object using JSON.stringify()
+  sessionStorage.setItem('name', JSON.stringify(usersName));
+}
+
+// Run the recordValues function whenever the button is clicked
+document.getElementById('btn').addEventListener('click', recordValues);
+
+function retrieveStoredValues() {
+  // After retrieving the item from session storage,
+  // we will need to parse the object string back into a normal object using JSON.parse();
+  var storedFullName = JSON.parse(sessionStorage.getItem('name'));
+
+  // Update the HTML Input values to match what was stored in localStorage
+  firstNameInput.value = storedFullName.firstName;
+  lastNameInput.value = storedFullName.lastName;
+}
+
+// When the page first loads,
+// Pull the stored values out of localStorage and set them to the corresponding text fields
+retrieveStoredValues();
 ```
